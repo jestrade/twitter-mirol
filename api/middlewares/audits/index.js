@@ -12,9 +12,10 @@ const audits = (req, res, next) => {
     const linea = `${date}::${id}::${ip}::${method}::${path}::${data} \n`;
 
     const archivo = fs.createWriteStream("./logs/audits.log", { 'flags': 'a'});
-    archivo.once("open", (f) => {
-        archivo.write(linea);
-    });
+    //archivo.once("open", (f) => {
+    //    archivo.write(linea);
+    //});
+    console.log(linea);
     
     next();
 };
