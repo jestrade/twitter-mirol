@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
-  node: circleci/heroku@0.0.10
+  heroku: circleci/heroku@0.0.10
 jobs:
   build-and-test:
     executor:
