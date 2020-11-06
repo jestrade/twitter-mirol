@@ -1,5 +1,5 @@
 const loadTweets = () => {
-    const urlApiRest = `https://twitter-jestrade.herokuapp.com/api/tweets`;
+    const urlApiRest = `/api/tweets`;
     fetch(urlApiRest)
     .then(response => response.json())
     .then(json=>{
