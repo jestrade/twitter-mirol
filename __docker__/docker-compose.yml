@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    env_file: 
+        - .env
+    ports:
+        - 8080:3000
+    depends_on:
+        - database  
+    networks:
+        - www 
+  database:
+    image: mongo
+    container_name: database 
+    ports:
+        - 27017:27017
+    volumes: 
+        - ./database:/data/db
+    networks:
+        - www 
+networks:
+    www:
+volumes:
+    database:
