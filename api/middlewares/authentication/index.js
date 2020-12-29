@@ -10,9 +10,8 @@ const authentication = (req, res, next) => {
         req.id = id; /*agregar al objeto request, el id del usuario recién obtenido*/
         next();
     } catch(e) {
-        res.json(response(false, undefined, "No autorizado"));
+        res.status(401).json(response(false, undefined, "No autorizado"));
     }
 };
 
 module.exports = authentication;
-
