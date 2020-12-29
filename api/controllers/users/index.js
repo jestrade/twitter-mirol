@@ -14,11 +14,11 @@ const login = (req, res) => {
             if (findUser) {
                 const id = user._id;
                 const token = jwt.sign(
+                    { id },
+                    config.jwtKey,
                     {
-                        exp: config.jwtExp,
-                        id,
-                    },
-                    config.jwtKey
+                        expiresIn: config.jwtExp,
+                    }
                 );
                 const { name, email } = user;
                 res
