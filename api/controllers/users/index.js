@@ -14,7 +14,7 @@ const login = (req, res) => {
             if (findUser) {
                 const id = user._id;
                 const token = jwt.sign(
-                    { id },
+                    { id, username },
                     config.jwtKey,
                     {
                         expiresIn: config.jwtExp,
