@@ -30,13 +30,14 @@ const getTweets = (req, res)=>{
 };
 
 const newComment = (req, res) => {
-    if (req.body.comment.length > 0){
-        const id = req.body.id;
-        const comment = {
-            comment: req.body.comment,
-            user: req.id
+    const { id: user } = req;
+    const { comment, id } = req.body;
+    if (comment.length > 0){
+        const comments = {
+            comment,
+            user
         };
-        Tweet.updateOne({ _id: id}, { $addToSet: { comments: comment } } ) 
+        Tweet.updateOne({ _id: id}, { $addToSet: { comments } } ) 
         .then((tweets)=>{
             res.status(200).json(response(true, tweets));
         })
@@ -77,8 +78,9 @@ const newTweet = (req, res)=>{
 
 const getTweet = (req, res) => {
     const id = req.params.id;
-    Tweet.find({ _id: id}, ["content", "createdAt"])
+    Tweet.find({_id: id}, ["content", "createdAt", "user", "likes", "comments"])
     .populate("user", ["name", "username"])
+    .populate("comments.user", ["name", "username"])
     .sort({ createdAt: -1 })
     .then((tweets)=>{
         res.status(200).json(response(true, tweets));
